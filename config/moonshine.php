@@ -5,7 +5,7 @@ use MoonShine\Forms\LoginForm;
 use MoonShine\Http\Middleware\Authenticate;
 use MoonShine\Http\Middleware\SecurityHeadersMiddleware;
 use MoonShine\Models\MoonshineUser;
-use MoonShine\MoonShineLayout;
+use App\MoonShine\MoonShineLayout;
 use MoonShine\Pages\ProfilePage;
 
 return [
@@ -44,8 +44,8 @@ return [
 	],
 
 	'model_resources' => [
-		'default_with_import' => true,
-		'default_with_export' => true,
+		'default_with_import' => false,
+		'default_with_export' => false,
 	],
 
 	'auth' => [
