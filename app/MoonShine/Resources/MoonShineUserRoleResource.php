@@ -32,9 +32,8 @@ class MoonShineUserRoleResource extends ModelResource
 		return [
 			Block::make('', [
 				ID::make()->sortable()->showOnExport(),
-				Text::make(__('moonshine::ui.resource.role_name'), 'name')
-					->required()
-					->showOnExport(),
+				Text::make('Название', 'name')
+					->required(),
 			]),
 		];
 	}

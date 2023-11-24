@@ -19,7 +19,9 @@ final class MoonShineLayout implements MoonShineLayoutContract
 				Flash::make(),
 				Header::make(),
 				Content::make(),
-				Footer::make()->menu(['https://moonshine-laravel.com/' => 'Documentation']),
+				Footer::make()->menu(!app()->isProduction() 
+					? ['https://moonshine-laravel.com/' => 'Documentation']
+					: [] ),
 			])->customAttributes(['class' => 'layout-page']),
 		]);
 	}

@@ -45,8 +45,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 				'success-bg' => '#1AA244',
 			],
 			'darkColors' => [
-				'primary' => '#1e62a8',
-				'secondary' => '#aa373f',
+				'primary' => '#1175dd',
+				'secondary' => '#d4222e',
 				'success-bg' => '#22723b',
 			]
 		];
