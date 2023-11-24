@@ -38,6 +38,27 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 	 */
 	protected function theme(): array
 	{
-		return [];
+		return [
+			'colors' => [
+				'primary' => '#2288ed',
+				'secondary' => '#e7505a',
+				'success-bg' => '#1AA244',
+			],
+			'darkColors' => [
+				'primary' => '#1e62a8',
+				'secondary' => '#aa373f',
+				'success-bg' => '#22723b',
+			]
+		];
+	}
+
+
+	public function boot(): void
+	{
+		parent::boot();
+
+		moonShineAssets()->add([
+			'css/admin.css',
+		]);
 	}
 }

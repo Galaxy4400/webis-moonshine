@@ -1,0 +1,14 @@
+.layout-menu .menu-inner-link:hover, 
+.layout-menu .menu-inner-button:hover {
+	background-color: rgba(255, 255, 255, .05);
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.layout-menu .menu-inner-button._is-active:hover {
+	background-color: rgba(var(--menu-hover-color, var(--primary)),.8);
+}
+
+.btn.btn-success,
+.btn.btn-success:hover {
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
+}

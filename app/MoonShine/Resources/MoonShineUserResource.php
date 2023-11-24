@@ -37,20 +37,18 @@ class MoonShineUserResource extends ModelResource
 	public array $with = ['moonshineUserRole'];
 
 
-	public function fields(): array
+	public function formFields(): array
 	{
 		return [
 			Grid::make([
 				Column::make('Главное', [
 					Block::make('Основные данные', [
-						ID::make()
-							->sortable(),
+						ID::make(),
 	
 						Text::make('Имя', 'name')
 							->required(),
 	
 						Email::make('E-mail', 'email')
-							->sortable()
 							->showOnExport()
 							->required(),
 	
@@ -76,21 +74,46 @@ class MoonShineUserResource extends ModelResource
 				])->columnSpan(8),
 
 				Column::make('Пароль', [
-					Block::make('Изменить пароль', [
+					Block::make($this->getItem() ? 'Изменить пароль' : 'Создать пароль', [
 						Password::make('Пароль', 'password')
 							->customAttributes(['autocomplete' => 'new-password'])
-							->hideOnIndex()
 							->eye(),
 	
 						PasswordRepeat::make('Повторите пароль', 'password_repeat')
 							->customAttributes(['autocomplete' => 'confirm-password'])
-							->hideOnIndex()
 							->eye(),
 					])
 				])->columnSpan(4),
 			]),
 		];
 	}
+
+
+	public function indexFields(): array
+	{
+		return [
+			ID::make()->sortable(),
+			Image::make('Аватар', 'avatar'),
+			Text::make('Имя', 'name')->sortable(),
+			Email::make('E-mail', 'email'),
+			BelongsTo::make('Роли', 'moonshineUserRole', resource: new MoonShineUserRoleResource()),
+			Date::make('Дата создания', 'created_at')->format("d.m.Y")->sortable(),
+		];
+	}
+
+
+	public function detailFields(): array
+	{
+		return [
+			ID::make(),
+			Image::make('Аватар', 'avatar'),
+			Text::make('Имя', 'name')->sortable(),
+			Email::make('E-mail', 'email'),
+			BelongsTo::make('Роли', 'moonshineUserRole', resource: new MoonShineUserRoleResource()),
+			Date::make('Дата создания', 'created_at')->format("d.m.Y")->sortable(),
+		];
+	}
+
 
 	/**
 	 * @return array{name: string, moonshine_user_role_id: string, email: mixed[], password: string}
