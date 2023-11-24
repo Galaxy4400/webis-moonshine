@@ -76,7 +76,7 @@ return [
 	],
 
 	'tinymce' => [
-		'file_manager' => false, // or 'laravel-filemanager' prefix for lfm
+		'file_manager' => env('MOONSHINE_FILE_MANAGER', false),
 		'token' => env('MOONSHINE_TINYMCE_TOKEN', ''),
 		'version' => env('MOONSHINE_TINYMCE_VERSION', '6'),
 	],

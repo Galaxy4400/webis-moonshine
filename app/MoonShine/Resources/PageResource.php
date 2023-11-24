@@ -7,13 +7,14 @@ namespace App\MoonShine\Resources;
 use App\Models\Page;
 use MoonShine\Fields\ID;
 
-use MoonShine\Attributes\Icon;
-use MoonShine\Resources\ModelResource;
-use Illuminate\Database\Eloquent\Model;
-use MoonShine\Decorations\Block;
-use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Slug;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\TinyMce;
+use MoonShine\Attributes\Icon;
+use MoonShine\Decorations\Block;
+use MoonShine\Resources\ModelResource;
+use Illuminate\Database\Eloquent\Model;
+use MoonShine\Fields\Relationships\BelongsTo;
 
 #[Icon('heroicons.outline.document-text')]
 class PageResource extends ModelResource
@@ -33,11 +34,13 @@ class PageResource extends ModelResource
 
 				Slug::make('ЧПУ', 'slug')
 					->from('title')
-					->hint('Если не указывать, то поле будет заполнено автоматически на основе заголовка')
-					->readonly(fn () => (bool) $this->getItemID())
+					->when(!$this->getItemID(), fn ($field) => $field->hint('Если не указывать, то поле будет заполнено автоматически на основе заголовка'))
+					->readonly((bool) $this->getItemID())
 					->hideOnIndex(),
 
 				BelongsTo::make('Родительская страница', 'page', 'title', new PageResource())->nullable(),
+
+				TinyMce::make('Контент страницы', 'body')->hideOnIndex(),
 			]),
 		];
 	}
