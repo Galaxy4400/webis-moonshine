@@ -12,16 +12,39 @@ use MoonShine\Fields\Text;
 use MoonShine\Fields\TinyMce;
 use MoonShine\Attributes\Icon;
 use MoonShine\Decorations\Block;
+use MoonShine\Pages\Crud\FormPage;
+use MoonShine\Pages\Crud\DetailPage;
+use App\MoonShine\Pages\PageIndexPage;
 use MoonShine\Resources\ModelResource;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\Fields\Relationships\BelongsTo;
 
+
 #[Icon('heroicons.outline.document-text')]
-class PageResource extends ModelResource
+class PageResource extends TreeResource
 {
 	protected string $model = Page::class;
 
 	protected string $title = 'Страницы';
+
+	protected string $column = 'title';
+
+	protected string $sortColumn = 'sorting';
+
+
+
+	protected function pages(): array
+	{
+		return [
+			PageIndexPage::make($this->title()),
+			FormPage::make(
+				$this->getItemID()
+					? __('moonshine::ui.edit')
+					: __('moonshine::ui.add')
+			),
+			DetailPage::make(__('moonshine::ui.show')),
+		];
+	}
 
 
 	public function fields(): array
@@ -75,5 +98,16 @@ class PageResource extends ModelResource
 	public function rules(Model $item): array
 	{
 		return [];
+	}
+
+
+	public function treeKey(): ?string
+	{
+		return 'page_id';
+	}
+
+	public function sortKey(): string
+	{
+		return $this->sortColumn();
 	}
 }
