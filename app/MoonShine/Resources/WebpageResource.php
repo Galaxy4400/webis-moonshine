@@ -13,7 +13,6 @@ use MoonShine\Attributes\Icon;
 use MoonShine\Decorations\Block;
 use MoonShine\Pages\Crud\FormPage;
 use MoonShine\Pages\Crud\DetailPage;
-use MoonShine\Resources\ModelResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use MoonShine\Fields\Relationships\BelongsTo;
@@ -21,7 +20,7 @@ use App\MoonShine\Pages\Webpages\WebpageIndexPage;
 
 
 #[Icon('heroicons.outline.document-text')]
-class WebpageResource extends ModelResource // TreeResource
+class WebpageResource extends TreeResource
 {
 	protected string $model = Webpage::class;
 
@@ -36,18 +35,18 @@ class WebpageResource extends ModelResource // TreeResource
 	protected bool $isAsync = true;
 
 
-	// protected function pages(): array
-	// {
-	// 	return [
-	// 		WebpageIndexPage::make($this->title()),
-	// 		FormPage::make(
-	// 			$this->getItemID()
-	// 				? __('moonshine::ui.edit')
-	// 				: __('moonshine::ui.add')
-	// 		),
-	// 		DetailPage::make(__('moonshine::ui.show')),
-	// 	];
-	// }
+	protected function pages(): array
+	{
+		return [
+			WebpageIndexPage::make($this->title()),
+			FormPage::make(
+				$this->getItemID()
+					? __('moonshine::ui.edit')
+					: __('moonshine::ui.add')
+			),
+			DetailPage::make(__('moonshine::ui.show')),
+		];
+	}
 
 
 	public function fields(): array
@@ -69,7 +68,6 @@ class WebpageResource extends ModelResource // TreeResource
 				BelongsTo::make('Родительская страница', 'webpage', 'title', new WebpageResource())
 					->valuesQuery(fn (Builder $query) => $query->where('id', '!=', $this->getItemID()))
 					->nullable()
-					->setColumn('webpage_id')
 					->sortable(),
 
 				TinyMce::make('Контент страницы', 'body')->hideOnIndex(),
@@ -102,14 +100,6 @@ class WebpageResource extends ModelResource // TreeResource
 	// 		ID::make()->sortable(),
 	// 	];
 	// }
-
-	public function filters(): array
-	{
-		return [
-			Text::make('Название', 'title'),
-			BelongsTo::make('Родительская страница', 'webpage', 'title', new WebpageResource())->nullable(),
-		];
-	}
 
 
 	public function rules(Model $item): array

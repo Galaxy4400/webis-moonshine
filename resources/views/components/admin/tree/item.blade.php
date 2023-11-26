@@ -15,18 +15,21 @@
 		<div class="handle cursor-pointer flex justify-start items-center gap-4">
 
 			<a @click.stop="tree_show_{{ $item->getKey() }} = !tree_show_{{ $item->getKey() }}"
-				class="flex gap-1 items-center"
+				class="flex gap-2 items-center"
 			>
 				<x-moonshine::icon icon="heroicons.chevron-up-down" />
 
+				<div>
+					{{ ucfirst($item->{$resource->column()}) }}
+				</div>
+
 				@if (isset($items[$item->getKey()]))
-					{{ count($items[$item->getKey()]) }}
+					<x-moonshine::badge color="blue">
+							{{ count($items[$item->getKey()]) }}
+					</x-moonshine::badge>
 				@endif
 			</a>
 
-			<div>
-				{{ ucfirst($item->{$resource->column()}) }}
-			</div>
 
 		</div>
 
