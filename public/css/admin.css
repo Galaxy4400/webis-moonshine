@@ -12,3 +12,24 @@
 .btn.btn-success:hover {
 	color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
+
+.line {
+	padding: 0.75rem 1.25rem;
+	border-radius: 0.5rem;
+	background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+:is(.dark .line) {
+	--tw-bg-opacity: 1;
+	background-color: rgba(var(--dark-600),var(--tw-bg-opacity));
+	--tw-shadow-color: rgb(0 0 0 / .05);
+	--tw-shadow: var(--tw-shadow-colored);
+}
+
+.mt-4 {
+	margin-top: 1rem;
+}
+
+.py-4 {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}

@@ -8,7 +8,7 @@ use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\Menu\MenuItem;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Resources\PageResource;
+use App\MoonShine\Resources\WebpageResource;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -28,7 +28,7 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 	protected function menu(): array
 	{
 		return [
-			MenuItem::make('Страницы', new PageResource()),
+			MenuItem::make('Страницы', new WebpageResource()),
 			MenuItem::make('Администраторы', new MoonShineUserResource()),
 			MenuItem::make('Роли', new MoonShineUserRoleResource()),
 		];

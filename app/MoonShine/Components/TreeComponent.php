@@ -5,18 +5,22 @@ declare(strict_types=1);
 namespace App\MoonShine\Components;
 
 
+use MoonShine\Buttons\EditButton;
 use MoonShine\Traits\HasResource;
+use MoonShine\Buttons\DeleteButton;
+use MoonShine\Buttons\DetailButton;
 use MoonShine\Resources\ModelResource;
+use MoonShine\ActionButtons\ActionButtons;
 use MoonShine\Components\MoonshineComponent;
 
 /**
  * @method static static make(ModelResource $resource)
  */
-final class Tree extends MoonshineComponent
+final class TreeComponent extends MoonshineComponent
 {
 	use HasResource;
 
-	protected string $view = 'admin.components.tree.index';
+	protected string $view = 'components.admin.tree.index';
 
 
 	public function __construct(ModelResource $resource)
@@ -49,6 +53,16 @@ final class Tree extends MoonshineComponent
 			'items' => $this->items(),
 			'resource' => $this->getResource(),
 			'route' => $this->getResource()->route('sortable'),
+			'buttons' => function ($item) {
+				$resource = $this->getResource()->setItem($item);
+
+				return ActionButtons::make([
+					...$resource->getIndexButtons(),
+					DetailButton::for($resource),
+					EditButton::for($resource, 'tree'),
+					DeleteButton::for($resource, 'tree'),
+				])->fillItem($item);
+			}
 		];
 	}
 }

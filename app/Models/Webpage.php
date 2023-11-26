@@ -6,14 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Page extends Model
+class Webpage extends Model
 {
 	use HasFactory;
 
-	protected $fillable = ['title', 'slug', 'page_id', 'sorting'];
+	protected $fillable = [
+		'title',
+		'slug',
+		'body',
+		'webpage_id', 
+		'sorting'
+	];
 
 
-	public function page(): BelongsTo
+	public function webpage(): BelongsTo
 	{
 		return $this->belongsTo(self::class);
 	}

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Page>
  */
-class PageFactory extends Factory
+class WebpageFactory extends Factory
 {
 	/**
 	 * Define the model's default state.
@@ -16,11 +16,12 @@ class PageFactory extends Factory
 	 */
 	public function definition(): array
 	{
-		$title = $this->faker->word();
+		$title = $this->faker->words(asText: true);
 
 		return [
 			'title' => $title,
 			'slug' => str($title)->slug(),
+			'body' => $this->faker->text(),
 		];
 	}
 }

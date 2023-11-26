@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Page;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Webpage;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -12,11 +12,12 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('pages', function (Blueprint $table) {
+		Schema::create('webpages', function (Blueprint $table) {
 			$table->id();
-			$table->foreignIdFor(Page::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+			$table->foreignIdFor(Webpage::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
 			$table->string('title');
 			$table->string('slug')->unique();
+			$table->text('body')->nullable();
 			$table->integer('sorting')->default(0);
 			$table->timestamps();
 		});
@@ -27,6 +28,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('pages');
+		Schema::dropIfExists('webpages');
 	}
 };

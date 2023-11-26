@@ -5,7 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Factories\AdminFactory;
-use Database\Factories\PageFactory;
+use Database\Factories\WebpageFactory;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,6 @@ class DatabaseSeeder extends Seeder
 			'name' => 'Евгений',
 		]);
 
-		PageFactory::new()->count(10)->create();
+		WebpageFactory::new()->count(10)->create();
 	}
 }
