@@ -17,37 +17,31 @@ class NavigationComposer
 			->orderBy('sorting')
 			->get();
 
-		$menu = $this->constructMenu($pages);
-
+		$menuItems = $this->constructMenu($pages);
 		
+		$menu = new Menu('Главное меню');
 
-		// foreach ($pages as $page) {
+		foreach ($menuItems as $menuItem) {
+			$menu->add($menuItem);
+		}
 
-		// 	$menu->add(new MenuItem('Дом', route('home')));
-		// }
-
-
-		// $menu = Menu::make()
-		// 	->add(MenuItem::make('Главная', route('home')))
-		// 	->add(MenuItem::make('Каталог', route('catalog')));
-
-		// $view->with('menu', $menu);
+		$view->with('menu', $menu);
 	}
 
 
-	private function constructMenu(Collection $collection, int $parentId = null, string $treeKey = 'parent_id'): Menu
+	private function constructMenu(Collection $collection, int $parentId = null, string $treeKey = 'parent_id'): array
 	{
-		$menu = new Menu('Главное меню');
+		$menuItems = [];
 
 		$items = $collection->where($treeKey, $parentId);
 
 		foreach ($items as $item) {
-			$submenu = new Menu($item->title, route('page', $item->slug));
-			$item->children = $this->constructMenu($collection, $item->id, $treeKey);
-			$menu->add($item);
+			// $submenu = new Menu($item->title, route('page', $item->slug));
+			// $item->children = $this->constructMenu($collection, $item->id, $treeKey);
+			// $menu->add($item);
 		}
 
-		return $tree;
+		return $menuItems;
 	}
 
 }
