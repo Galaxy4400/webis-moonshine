@@ -19,6 +19,8 @@ return new class extends Migration
 			$table->string('slug')->unique();
 			$table->text('body')->nullable();
 			$table->integer('sorting')->default(0);
+			$table->unsignedInteger('_lft');
+			$table->unsignedInteger('_rgt');
 			$table->timestamps();
 		});
 	}

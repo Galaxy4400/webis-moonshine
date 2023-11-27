@@ -12,6 +12,10 @@ class NavigationComposer
 {
 	public function compose(View $view): void
 	{
+		$test = Webpage::orderBy('sorting', 'asc')->get()->toTree();
+
+		dd($test);
+
 		$pages = Webpage::query()
 			->select(['id', 'parent_id', 'title', 'slug'])
 			->orderBy('sorting')
