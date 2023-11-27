@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Webpage;
 
 class WebpageController extends Controller
 {
-	//
+	public function __invoke(Webpage $page)
+	{
+		return view('pages.page', compact('page'));
+	}
 }

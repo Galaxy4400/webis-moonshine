@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\WebpageController;
+use App\Models\Webpage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('pages.index');
 });
 
 
-Route::get('/123', function () {
-	return 'test';
-});
+Route::get('/{page:slug}', WebpageController::class);
