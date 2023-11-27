@@ -14,7 +14,7 @@ return new class extends Migration
 	{
 		Schema::create('webpages', function (Blueprint $table) {
 			$table->id();
-			$table->foreignIdFor(Webpage::class)->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+			$table->foreignIdFor(Webpage::class, 'parent_id')->nullable()->constrained('webpages')->nullOnDelete()->cascadeOnUpdate();
 			$table->string('title');
 			$table->string('slug')->unique();
 			$table->text('body')->nullable();

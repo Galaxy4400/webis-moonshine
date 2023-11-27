@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Webpage extends Model
 {
@@ -14,13 +15,19 @@ class Webpage extends Model
 		'title',
 		'slug',
 		'body',
-		'webpage_id', 
+		'parent_id', 
 		'sorting'
 	];
 
 
-	public function webpage(): BelongsTo
+	public function parent(): BelongsTo
 	{
-		return $this->belongsTo(self::class);
+		return $this->belongsTo(self::class, 'parent_id');
+	}
+
+
+	public function children(): HasMany
+	{
+		return $this->hasMany(self::class, 'parent_id');
 	}
 }

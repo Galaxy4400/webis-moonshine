@@ -30,7 +30,7 @@ class WebpageResource extends TreeResource
 
 	protected string $sortColumn = 'sorting';
 
-	protected string $treeKey = 'webpage_id';
+	protected string $treeKey = 'parent_id';
 
 	protected bool $isAsync = true;
 
@@ -65,7 +65,7 @@ class WebpageResource extends TreeResource
 					->readonly((bool) $this->getItem())
 					->hideOnIndex(),
 
-				BelongsTo::make('Родительская страница', 'webpage', 'title', new WebpageResource())
+				BelongsTo::make('Родительская страница', 'parent', 'title', new WebpageResource())
 					->valuesQuery(fn (Builder $query) => $query->where('id', '!=', $this->getItemID()))
 					->nullable()
 					->sortable(),
