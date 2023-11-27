@@ -1,5 +1,10 @@
 @extends('layouts.main')
 
+@section('title', "Страница: {$page->title}")
+
 @section('content')
-	Страница: {{ $page->title }}
+	<br>
+	<div>
+		{!! $page->body !!}
+	</div>
 @endsection
