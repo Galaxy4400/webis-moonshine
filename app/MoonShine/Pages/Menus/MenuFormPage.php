@@ -14,10 +14,16 @@ class MenuFormPage extends FormPage
 {
 	protected function bottomLayer(): array
 	{
+		$items = $this->getResource()
+			->getItem()
+			->items()
+			->orderBy('sorting')
+			->get();
+
 		return [
 			Divider::make(),
 			Heading::make('Пункты меню'),
-			TreeComponent::make(new MenuItemResource(), $this->getResource()->getItem()->items),
+			TreeComponent::make(new MenuItemResource(), $items),
 			...parent::bottomLayer()
 		];
 	}

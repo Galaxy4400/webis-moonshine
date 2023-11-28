@@ -33,9 +33,7 @@ abstract class TreeResource extends ModelResource
 			if ($keyName === $this->sortKey()) {
 				throw new InvalidArgumentException('Primary key cannot be used as a sort');
 			}
-
-			// Debugbar::addMessage('test');
-
+			
 			if ($this->treeKey()) {
 				$model->newModelQuery()
 					->firstWhere($keyName, $request->get('id'))
@@ -44,7 +42,6 @@ abstract class TreeResource extends ModelResource
 						$this->treeKey() => $request->get('parent')
 					]);
 			}
-
 
 			if ($request->str('data')->isNotEmpty()) {
 				$caseStatement = $request->str('data')

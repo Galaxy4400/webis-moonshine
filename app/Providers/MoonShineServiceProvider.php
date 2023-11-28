@@ -32,7 +32,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 		return [
 			MenuItem::make('Страницы', new WebpageResource()),
 			MenuItem::make('Конструктор меню', new MenuResource()),
-			MenuItem::make('Элементы меню', new MenuItemResource()),
 			MenuItem::make('Администраторы', new MoonShineUserResource()),
 			MenuItem::make('Роли', new MoonShineUserRoleResource()),
 		];

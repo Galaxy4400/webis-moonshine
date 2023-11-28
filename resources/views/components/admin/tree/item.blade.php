@@ -20,6 +20,9 @@
 				<x-moonshine::icon icon="heroicons.chevron-up-down" />
 
 				<div>
+					{{ $item->getKey() }}
+				</div>
+				<div>
 					{{ $item->{$resource->column()} }}
 				</div>
 

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Factories\AdminFactory;
 use Database\Factories\MenuFactory;
@@ -27,6 +26,6 @@ class DatabaseSeeder extends Seeder
 
 		MenuFactory::new()->count(2)->create();
 
-		MenuItemFactory::new()->count(20)->create();
+		MenuItemFactory::new()->count(10)->create();
 	}
 }
