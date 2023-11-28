@@ -13,6 +13,7 @@ use MoonShine\Pages\Crud\FormPage;
 use MoonShine\Pages\Crud\DetailPage;
 use MoonShine\Resources\ModelResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\MoonShine\Pages\MenuItems\MenuItemIndexPage;
 
 class MenuItemResource extends TreeResource // ModelResource
@@ -60,6 +61,14 @@ class MenuItemResource extends TreeResource // ModelResource
 			]),
 		];
 	}
+
+
+	// public function query(): Builder
+	// {
+	// 	return parent::query()
+	// 		->limit(5);
+	// }
+
 
 	public function rules(Model $item): array
 	{

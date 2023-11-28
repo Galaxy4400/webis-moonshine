@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ abstract class TreeResource extends ModelResource
 			if ($keyName === $this->sortKey()) {
 				throw new InvalidArgumentException('Primary key cannot be used as a sort');
 			}
+
+			// Debugbar::addMessage('test');
 
 			if ($this->treeKey()) {
 				$model->newModelQuery()

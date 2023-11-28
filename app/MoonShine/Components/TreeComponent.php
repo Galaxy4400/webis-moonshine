@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Components;
 
-
+use Illuminate\Support\Collection;
 use MoonShine\Buttons\EditButton;
 use MoonShine\Traits\HasResource;
 use MoonShine\Buttons\DeleteButton;
@@ -23,7 +23,9 @@ final class TreeComponent extends MoonshineComponent
 	protected string $view = 'components.admin.tree.index';
 
 
-	public function __construct(ModelResource $resource)
+	public function __construct(
+		ModelResource $resource,
+		protected ?Collection $items = null)
 	{
 		$this->setResource($resource);
 	}
@@ -33,7 +35,7 @@ final class TreeComponent extends MoonshineComponent
 	{
 		$performed = [];
 		$resource = $this->getResource();
-		$items = $resource->items();
+		$items = $this->items ?: $resource->items();
 
 		foreach ($items as $item) {
 			$parent = is_null($resource->treeKey()) || is_null($item->{$resource->treeKey()})

@@ -63,7 +63,6 @@ class MenuResource extends ModelResource
 	}
 
 
-
 	public function rules(Model $item): array
 	{
 		return [];
