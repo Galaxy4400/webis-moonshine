@@ -5,7 +5,7 @@ namespace App\Menu;
 abstract class MenuComponent
 {
 	public function __construct(
-		protected string $label,
+		protected ?string $label = null,
 		protected ?string $link = null,
 	) {
 	}

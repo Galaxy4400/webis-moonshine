@@ -7,49 +7,35 @@ use App\Menu\MenuItem;
 use App\Models\Webpage;
 use Illuminate\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use MoonShine\Models\MoonshineUser;
 
 class NavigationComposer
 {
 	public function compose(View $view): void
 	{
-		$test = Webpage::orderBy('sorting', 'asc')->get()->toTree();
+		$nodes = Webpage::query()
+			->select(['id', 'parent_id', 'title', 'slug', '_lft', '_rgt'])
+			->orderBy('sorting', 'asc')
+			->get()
+			->toTree();
 
-		dd($test);
-
-		$pages = Webpage::query()
-			->select(['id', 'parent_id', 'title', 'slug'])
-			->orderBy('sorting')
-			->get();
-
-		$menuItems = $this->constructMenu($pages);
-		
-		$menu = new Menu('Главное меню');
-
-		foreach ($menuItems as $menuItem) {
-			$menu->add($menuItem);
-		}
+		$menu = $this->constructMenu($nodes);
 
 		$view->with('menu', $menu);
 	}
 
 
-	private function constructMenu(Collection $collection, int $parentId = null, string $treeKey = 'parent_id'): array
+	private function constructMenu($nodes, $label = null, $link = null): Menu
 	{
-		$menuItems = [];
+		$menu = new Menu($label, $link);
 
-		$items = $collection->where($treeKey, $parentId);
+		$nodes->each(function ($node) use ($menu) {
+			$menuItem = $this->constructMenu($node->children, $node->title, route('page', $node->slug));
+			$menu->add($menuItem);
+		});
 
-		foreach ($items as $item) {
-			// $submenu = new Menu($item->title, route('page', $item->slug));
-			// $item->children = $this->constructMenu($collection, $item->id, $treeKey);
-			// $menu->add($item);
-		}
-
-		return $menuItems;
+		return $menu;
 	}
 
 }
-
-
-
-

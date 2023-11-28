@@ -2,9 +2,12 @@
 
 namespace App\Menu;
 
+use Countable;
+use Traversable;
+use IteratorAggregate;
 use Illuminate\Support\Collection;
 
-class Menu extends MenuComponent
+class Menu extends MenuComponent implements IteratorAggregate, Countable
 {
 	protected array $items = [];
 
@@ -20,5 +23,17 @@ class Menu extends MenuComponent
 		$this->items[] = $item;
 
 		return $this;
+	}
+
+
+	public function getIterator(): Traversable
+	{
+		return $this->items();
+	}
+
+
+	public function count(): int
+	{
+		return $this->items()->count();
 	}
 }
