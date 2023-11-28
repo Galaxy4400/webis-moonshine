@@ -20,11 +20,7 @@
 				<x-moonshine::icon icon="heroicons.chevron-up-down" />
 
 				<div>
-					{{ $item->id }}
-				</div>
-
-				<div>
-					{{ ucfirst($item->{$resource->column()}) }}
+					{{ $item->{$resource->column()} }}
 				</div>
 
 				@if (isset($items[$item->getKey()]))

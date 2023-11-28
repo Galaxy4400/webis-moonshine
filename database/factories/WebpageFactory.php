@@ -16,7 +16,7 @@ class WebpageFactory extends Factory
 	 */
 	public function definition(): array
 	{
-		$title = $this->faker->words(asText: true);
+		$title = ucfirst($this->faker->words(asText: true));
 
 		return [
 			'title' => $title,

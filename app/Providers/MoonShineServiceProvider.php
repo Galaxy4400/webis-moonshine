@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\Menu\MenuItem;
+use App\MoonShine\Resources\MenuResource;
+use App\MoonShine\Resources\WebpageResource;
+use App\MoonShine\Resources\MenuItemResource;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Resources\WebpageResource;
+use MoonShine\Providers\MoonShineApplicationServiceProvider;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -29,6 +31,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 	{
 		return [
 			MenuItem::make('Страницы', new WebpageResource()),
+			MenuItem::make('Конструктор меню', new MenuResource()),
+			MenuItem::make('Элементы меню', new MenuItemResource()),
 			MenuItem::make('Администраторы', new MoonShineUserResource()),
 			MenuItem::make('Роли', new MoonShineUserRoleResource()),
 		];
