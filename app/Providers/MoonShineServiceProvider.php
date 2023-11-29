@@ -17,7 +17,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 
 	protected function resources(): array
 	{
-		return [];
+		return [
+			new MenuItemResource(),
+		];
 	}
 
 
